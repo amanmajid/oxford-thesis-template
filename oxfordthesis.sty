@@ -1,0 +1,221 @@
+% Oxford D. Phil. Thesis style
+% based on Memoir
+% and based on pwasu.sty
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Usage:
+% ======
+%
+% A template for a thesis is provided in the file "asthesis.tex",
+% available from the same place where you obtained this file.
+%
+% In the following I will introduce some commands defined:
+% ==============
+%
+%
+% \settitle        % title of dissertation.
+% \setauthor       % author of dissertation.
+% \setdegree       % use if not 'Doctor of Philosophy'
+% \oxfdedication   % set dedication
+% \oxfabstract     % abstract
+% \oxfack          % acknowledgements
+%=============================
+
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{oxfordthesis}[2011/06/18 v0.1 Oxford Thesis]
+%% Only works with the memoir class!!!!!!!!!!!!!!!
+\@ifclassloaded{memoir}{\let\endoxf\relax}{\let\endoxf\endinput
+  \PackageError{oxfordthesis}{The oxford thesis package only works with the memoir class}{\@ehd}}
+\endoxf
+% Some useful lengths for layout purposes
+\newlength{\toptafiddle}
+\newlength{\bottafiddle}
+\newlength{\topfiddle}
+\newlength{\botfiddle}
+\newlength{\linespace}
+
+%% set up margins, assuming A4 paper, and compliance with
+%% big grey book
+% Untrimmed A4 stock
+\stockaiv
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+
+% left, right and textwidth
+\setlrmarginsandblock{3.5cm}{2.5cm}{*}
+%% bottom of text at 1in, footer below
+%% top of header at 1in, first text line double spaced below base of header
+\setlength{\linespace}{\baselineskip} %% the current equivalent of \onelineskip
+\setlength{\headheight}{\onelineskip}
+\setlength{\headsep}{2\linespace}
+\addtolength{\headsep}{-\topskip}
+%\setlength{\uppermargin}{1in}
+\addtolength{\uppermargin}{\headheight}
+\addtolength{\uppermargin}{\headsep}
+%\setlength{\lowermargin}{1in}
+%\setlength{\footskip}{0.5in}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-\uppermargin}
+\addtolength{\textheight}{-\lowermargin}
+%% the fiddle lengths (..ta.. for title/approval page, others for prelims)
+%% (determined by many trials and errors)
+\setlength{\toptafiddle}{2\linespace}
+\setlength{\topfiddle}{\toptafiddle}
+\setlength{\bottafiddle}{\onelineskip}
+\checkandfixthelayout[nearest]
+
+\makeatletter
+% vaguely based on memoir's demo chapterstyle, with bits of companion
+\makechapterstyle{thesis}{
+	\renewcommand{\printchaptername}{\raggedleft\chapnamefont \@chapapp}
+	\renewcommand{\chapnamefont}{\normalfont\LARGE\scshape}
+	\renewcommand{\chapnumfont}{\normalfont\LARGE\scshape}
+	\renewcommand{\chaptitlefont}{\normalfont\Huge\emph}
+	\renewcommand{\printchaptertitle}[1]{\raggedleft \chaptitlefont{ ##1}}
+	\renewcommand{\afterchaptertitle}{\vskip\onelineskip \vskip \afterchapskip}
+	% The following puts page numbers in the margin as in the Ruled pagestyle
+    \makeheadposition{plain}{flushright}{flushleft}{flushright}{flushleft}
+    \makerunningwidth{plain}{1\textwidth}
+    \makeoddfoot{plain}{}{}{\thepage}
+    \makeevenfoot{plain}{\thepage}{}{}
+}
+\makeatother
+
+\setsecnumdepth{subsection}
+
+\let\oldtoc\tableofcontents
+\renewcommand{\tableofcontents}{\clearpage\begin{SingleSpace}\pdfbookmark{Contents}{contents}\maxtocdepth{subsection}\oldtoc*\end{SingleSpace}}
+
+\let\oldlof\listoffigures
+\renewcommand{\listoffigures}{\clearpage\pagestyle{lof}\oldlof}
+\renewcommand{\listoffigures}{\clearpage\begin{SingleSpace}\setlength\cftparskip{1ex}\pdfbookmark{List of Figures}{figures}\oldlof*\end{SingleSpace}}
+
+% The year and term the thesis is submitted
+\def\degreedate#1{\makeatletter\gdef\oxfdegreedate{#1}\makeatother}
+% The full (unabbreviated) name of the degree
+\def\degree#1{\makeatletter\gdef\oxfdegree{#1}\makeatother}
+% The name of your college
+\def\college#1{\makeatletter\gdef\oxfcollege{#1}\makeatother}
+% The name of the university
+\def\university#1{\makeatletter\gdef\oxfuni{#1}\makeatother}
+% The title
+\def\thetitle#1{\makeatletter\gdef\oxfthetitle{#1}\makeatother}
+% The author
+\def\theauthor#1{\makeatletter\gdef\oxftheauthor{#1}\makeatother}
+
+%%% Oxford uni logo
+\def\logo{{\includegraphics[width=30mm]{frontmatter/graphics/oxlogo_small}}}
+
+%%% typesets the TITLE page
+\newcommand{\submittedtext}{{A derg submitted for the degree of}}
+\newcommand{\titlepage}
+  {{ %
+  \clearpage
+  \thispagestyle{empty}
+  \begin{center}
+  \vspace*{-4em}
+      { \Huge {\bfseries {\oxfthetitle}} \par}
+  {\large \vspace*{20mm} {\logo \par} \vspace*{20mm}}
+      {{\Large \oxftheauthor} \par}
+  {\large \vspace*{1ex}
+      {{\oxfcollege} \par}
+  \vspace*{1ex}
+  {\oxfuni \par}
+  \vfill
+      {{\submittedtext} \par}
+  \vspace*{1ex}
+      {\emph {\oxfdegree} \par}
+  \vspace*{2ex}
+      {\oxfdegreedate}}
+  \end{center}
+  \par
+  \enlargethispage{\bottafiddle}
+  \clearpage
+  }}
+
+\newenvironment{dedication}
+{
+  \clearpage
+  \thispagestyle{empty}
+  \begin{center}
+  \vspace*{1.5cm}
+  {\LARGE }
+  \end{center}
+  \vspace{0.5cm}
+  \begin{verse}\begin{center}
+}
+{
+  \end{center}\end{verse}
+}
+
+\newenvironment{publications}
+{
+  \clearpage
+  \thispagestyle{empty}
+  \centering
+  \vspace*{-2.5cm}
+  {\Large \bfseries List of Publications}
+  \vspace{0.5cm}
+  \begin{quote}
+}
+{
+  \end{quote}
+}
+
+
+% ACKNOWLEDGEMENTS
+%
+% The acknowledgements environment puts a large, bold, centered
+% "Acknowledgements" label at the top of the page. The acknowledgements
+% themselves appear in a quote environment, i.e. tabbed in at both sides, and
+% on its own page.
+
+\newenvironment{acknowledgements}
+{
+  \clearpage
+  \thispagestyle{empty}
+  \centering
+  \vspace*{-2.5cm}
+  {\Large \bfseries Acknowledgements}
+  \vspace{0.5cm}
+  \begin{quote}
+}
+{
+  \end{quote}
+}
+
+\newenvironment{credit}
+{
+  \clearpage
+  \thispagestyle{empty}
+  \centering
+  \vspace*{-2.5cm}
+  {\Large \bfseries Apportion of Credit}
+  \vspace{0.5cm}
+  \begin{quote}
+}
+{
+  \end{quote}
+}
+
+\renewenvironment{abstract}
+{
+\clearpage
+\thispagestyle{empty}
+\begin{center}
+\vspace*{-2.5cm}
+{\Large \bfseries  Abstract}
+\end{center}
+\vspace{0.5cm}
+\begin{quote}
+}
+{
+\end{quote}
+}
+
+\sloppy % put too much space between words in favour of overfilling a hbox
+
+%% use the thesis chapterstyle
+\chapterstyle{thesis}
+%% Ruled page style
+\pagestyle{ruled}
+\endinput

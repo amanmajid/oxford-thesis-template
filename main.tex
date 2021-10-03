@@ -1,0 +1,151 @@
+\documentclass[a4paper,twoside,openany,12pt]{memoir}
+
+% Memoir linespacing
+\DoubleSpacing
+
+% abstract boxes
+\usepackage{setspace}
+\usepackage{tcolorbox}
+\newtcolorbox{mybox}{colback=gray!5!white,
+                     colframe=blue!50!black,
+                     sharp corners}
+
+% LaTeX packages
+\usepackage{amsmath}
+\usepackage{pdflscape}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bigfoot}
+\usepackage{bm}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  safeinputenc,
+  style=apa,
+  backend=biber,
+  sorting=nyt,
+  minnames=1,
+  maxnames=1,
+  maxbibnames=1,
+  doi=false,
+  url=false,
+  maxalphanames=1,
+  maxcitenames=1,
+  %biblabel=brackets
+]{biblatex}
+\addbibresource{refs.bib}
+\usepackage{libertine}
+\usepackage{lipsum}
+\usepackage{oxfordthesis}
+\usepackage{xr}
+\usepackage{xr-hyper}
+% \usepackage{tcolorbox}
+% \newtcolorbox{mybox}{colback=gray!20!white,
+%                      colframe=gray!20!white,
+%                      sharp corners}
+                     
+% Title / Author / Date / Degree / etc.
+\input{metadata}
+
+\usepackage[
+	pdftitle={\oxfthetitle},
+	pdfauthor={\oxftheauthor},
+	pdfsubject={Thesis for the Degree of \oxfdegree, \oxfdegreedate},
+	pdfborder=0,
+	bookmarks=true,
+	bookmarksnumbered=true,
+	bookmarksopen=true,
+	bookmarksopenlevel=1,
+	plainpages=false,
+	pdfpagelabels=true,
+	colorlinks=true,
+    citecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+]{hyperref}
+\usepackage{memhfixc}
+
+% Your Macros File Here
+\include{macros}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=25mm,
+ top=40mm,
+ right=25mm,
+ bottom=40mm,
+ }
+
+\usepackage[acronym,toc]{glossaries}
+\input{frontmatter/glossary}
+\input{frontmatter/acronyms}
+
+% Main document
+\setlength{\parskip}{0.5\baselineskip}%
+\setlength{\parindent}{0pt}%
+\renewcommand{\baselinestretch}{1.5}
+\begin{document}
+
+\titlepage
+\frontmatter
+% \include{frontmatter/dedication}
+% \include{frontmatter/acknowledgements}
+% \include{frontmatter/abstract}
+% \include{frontmatter/publications}
+\tableofcontents
+\listoffigures
+\printglossary[type=\acronymtype]
+\mainmatter
+
+% %----------------------------------------------------
+% CHAPTER 1: Thesis intro
+\begin{refsection}
+\chapter{\label{ch1}Introduction} 
+\input{text/ch1/thesis-intro}
+\printbibliography[title={References}]
+\end{refsection}
+
+
+% %----------------------------------------------------
+% CHAPTER 2: First significant chapter
+\begin{refsection}
+\chapter{\label{ch2}My never ending love for \LaTeX} 
+\input{text/ch2/ch2-introduction}
+\input{text/ch2/ch2-methods}
+\input{text/ch2/ch2-results}
+\input{text/ch2/ch2-conclusions}
+\printbibliography[title={References}]
+\end{refsection}
+
+% % %----------------------------------------------------
+% % FINAL CHAPTER: THESIS CONCLUSIONS
+% \begin{refsection}
+% \chapter{\label{conclusions}Conclusions} 
+% \input{text/ch99-conclusions/conclusion}
+% \printbibliography[title={References}]
+% \end{refsection}
+
+
+% % %----------------------------------------------------
+% % APPENDIX
+
+% \begin{refsection}
+% \chapter{\label{appendix}Appendix} 
+% \input{text/appendix/cost-calculations}
+% \printbibliography[title={References}]
+% \end{refsection}
+% \backmatter
+
+% %----------------------------------------------------
+% GLOSSARY
+\clearpage
+% glossary at the end
+\printglossary
+
+\end{document}
