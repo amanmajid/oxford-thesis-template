@@ -1,5 +1,7 @@
 # Oxford Thesis Template
- University of Oxford's LaTeX thesis template... made a little more modern
+#### The classic University of Oxford LaTeX thesis template... but a little more modern
+
+<img align="center" width="1000" src="https://github.com/amanmajid/oxford-thesis-template/blob/main/cover_photo.png">
 
 ### About
 This template adopts K.A. Gillow's widely used [template](https://www.overleaf.com/latex/templates/university-of-oxford-mathematical-institute-phd-thesis-template/xzvzjnxbmftm) to bring a few modern touches. It is also well-suited to a Thesis by publications, where each chapter is a stand-alone piece. Check out the sample [here](https://github.com/amanmajid/oxford-thesis-template/blob/main/sample_pdf.pdf)!
