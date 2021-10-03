@@ -1,3 +1,5 @@
+<img align="center" width="500" src="https://github.com/amanmajid/oxford-thesis-template/blob/main/cover_photo.png">
+
 # Oxford Thesis Template
  University of Oxford's LaTeX thesis template... made a little more modern
 
