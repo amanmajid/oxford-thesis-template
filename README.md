@@ -1,5 +1,5 @@
 # Oxford Thesis Template
- The classic University of Oxford LaTeX thesis template... but a little more modern
+#### The classic University of Oxford LaTeX thesis template... but a little more modern
 
 <img align="center" width="1000" src="https://github.com/amanmajid/oxford-thesis-template/blob/main/cover_photo.png">
 
